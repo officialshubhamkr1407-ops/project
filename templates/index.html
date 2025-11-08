@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <h1 class="display-4 mb-4">Welcome to MediMind</h1>
+        <p class="lead mb-4">Your AI-powered healthcare assistant for disease risk prediction</p>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-kidney fa-3x text-primary mb-3"></i>
+                <h3 class="card-title">Kidney Disease Prediction</h3>
+                <p class="card-text">Assess your risk of kidney disease based on various health parameters.</p>
+                <a href="/kidney" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-liver fa-3x text-primary mb-3"></i>
+                <h3 class="card-title">Liver Disease Prediction</h3>
+                <p class="card-text">Evaluate your risk of liver disease using advanced AI algorithms.</p>
+                <a href="/liver" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5">
+    <h2 class="h4 mb-4">How It Works</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="step">
+                <i class="fas fa-clipboard-list fa-2x text-primary mb-3"></i>
+                <h4>1. Enter Your Data</h4>
+                <p>Provide your health parameters and medical history</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="step">
+                <i class="fas fa-brain fa-2x text-primary mb-3"></i>
+                <h4>2. AI Analysis</h4>
+                <p>Our AI model analyzes your data</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="step">
+                <i class="fas fa-chart-line fa-2x text-primary mb-3"></i>
+                <h4>3. Get Results</h4>
+                <p>Receive your risk assessment and recommendations</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+    .step {
+        padding: 20px;
+        text-align: center;
+    }
+    .card {
+        transition: transform 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
