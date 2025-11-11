@@ -20,34 +20,64 @@ def liver():
 @app.route('/predict_kidney', methods=['POST'])
 def predict_kidney():
     try:
-        # ... (Your kidney code is fine, no changes needed) ...
+        # Get values from the form
         features = [
-            float(request.form['age']), float(request.form['bp']),
-            float(request.form['sg']), float(request.form['al']),
-            float(request.form['su']), float(request.form['rbc']),
-            float(request.form['pc']), float(request.form['pcc']),
-            float(request.form['ba']), float(request.form['bgr']),
-            float(request.form['bu']), float(request.form['sc']),
-            float(request.form['sod']), float(request.form['pot']),
-            float(request.form['hemo']), float(request.form['pcv']),
-            float(request.form['wc']), float(request.form['rc']),
-            float(request.form['htn']), float(request.form['dm']),
-            float(request.form['cad']), float(request.form['appet']),
-            float(request.form['pe']), float(request.form['ane'])
+            float(request.form['age']),
+            float(request.form['bp']),
+            float(request.form['sg']),
+            float(request.form['al']),
+            float(request.form['su']),
+            float(request.form['rbc']),
+            float(request.form['pc']),
+            float(request.form['pcc']),
+            float(request.form['ba']),
+            float(request.form['bgr']),
+            float(request.form['bu']),
+            float(request.form['sc']),
+            float(request.form['sod']),
+            float(request.form['pot']),
+            float(request.form['hemo']),
+            float(request.form['pcv']),
+            float(request.form['wc']),
+            float(request.form['rc']),
+            float(request.form['htn']),
+            float(request.form['dm']),
+            float(request.form['cad']),
+            float(request.form['appet']),
+            float(request.form['pe']),
+            float(request.form['ane'])
         ]
-        prediction = predict_kidney_disease(features)
+
+        # Make prediction (force reload to ensure latest models are used)
+        prediction = predict_kidney_disease(features, force_reload=True)
+
+        # Handle error case (-1)
+        if prediction == -1:
+            return jsonify({
+                'success': False,
+                'error': 'Failed to make prediction. Please check if models are loaded correctly.'
+            })
+
+        # Convert to native Python int for JSON serialization
+        prediction = int(prediction)
+
         return jsonify({
             'success': True,
             'prediction': prediction,
             'message': 'High risk of kidney disease' if prediction == 1 else 'Low risk of kidney disease'
         })
+
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        })
 
 
 @app.route('/predict_liver', methods=['POST'])
 def predict_liver():
     try:
+        # Get values from the form
         features = [
             float(request.form['age_of_patient']),
             float(request.form['gender_of_patient']),
@@ -64,19 +94,28 @@ def predict_liver():
         # Make prediction
         prediction = predict_liver_disease(features)
 
-        # --- NEW ERROR CHECK ---
-        # Check if the model returned our -1 error code
+        # Handle error case (-1)
         if prediction == -1:
             return jsonify({
                 'success': False,
-                'error': 'Model is not loaded or failed to predict. Please check server logs.'
+                'error': 'Failed to make prediction. Please check if models are loaded correctly.'
             })
-        # --- END NEW ERROR CHECK ---
 
+        # Convert to native Python int for JSON serialization
+        prediction = int(prediction)
+
+        # Ensure message is correct (double-check to prevent any confusion)
+        if prediction == 1:
+            message = 'High risk of liver disease'
+        elif prediction == 0:
+            message = 'Low risk of liver disease'
+        else:
+            message = 'Unable to determine risk'
+        
         return jsonify({
             'success': True,
             'prediction': prediction,
-            'message': 'High risk of liver disease' if prediction == 1 else 'Low risk of liver disease'
+            'message': message
         })
 
     except Exception as e:

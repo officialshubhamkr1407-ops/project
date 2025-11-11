@@ -8,6 +8,22 @@
         <div class="card shadow-lg border-0">
             <div class="card-body">
                 <form id="kidneyForm" class="needs-validation" novalidate>
+                    <!-- Sample Data Buttons -->
+                    <div class="card mb-4 border-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Sample Data</h5>
+                            <p class="text-muted small mb-3">Load predefined sample values to test the prediction model</p>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-success" id="loadLowRiskKidney">
+                                    <i class="fas fa-check-circle"></i> Load Low Risk Sample
+                                </button>
+                                <button type="button" class="btn btn-danger" id="loadHighRiskKidney">
+                                    <i class="fas fa-exclamation-triangle"></i> Load High Risk Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="container-fluid">
                         <div class="row g-4">
 
@@ -270,6 +286,44 @@ $(document).ready(function() {
         $('#' + this.id + 'Value').text(this.value);
     });
 
+    // --- Sample Data Loaders ---
+    
+    // Low Risk Sample (Normal values - based on actual healthy ranges from training data)
+    // Healthy ranges: bp: 60-80, sg: 1.02, age: 12-80, bu: 10-50, sc: 0.4-1.2, etc.
+    $('#loadLowRiskKidney').on('click', function() {
+        const lowRiskValues = [40, 70, 1.02, 0, 0, 0, 0, 0, 0, 100, 30, 0.9, 140, 4.3, 15, 46, 7000, 5.4, 0, 0, 0, 0, 0, 0];
+        loadKidneyValues(lowRiskValues);
+    });
+    
+    // High Risk Sample (Abnormal values)
+    $('#loadHighRiskKidney').on('click', function() {
+        const highRiskValues = [65, 180, 1.010, 3, 2, 1, 1, 1, 1, 250, 100, 3.5, 130, 5.5, 10, 30, 12000, 3.0, 1, 1, 1, 1, 1, 1];
+        loadKidneyValues(highRiskValues);
+    });
+    
+    // Function to load kidney values
+    function loadKidneyValues(values) {
+        const fieldOrder = [
+            'age', 'bp', 'sg', 'al', 'su', 'rbc', 'pc', 'pcc', 'ba', 
+            'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo', 'pcv', 'wc', 'rc',
+            'htn', 'dm', 'cad', 'appet', 'pe', 'ane'
+        ];
+        
+        fieldOrder.forEach((fieldId, index) => {
+            const value = values[index];
+            const $field = $('#' + fieldId);
+            
+            if ($field.length) {
+                if ($field.is('input[type="range"]')) {
+                    $field.val(value);
+                    $('#' + fieldId + 'Value').text(value);
+                } else if ($field.is('select')) {
+                    $field.val(value.toString());
+                }
+            }
+        });
+    }
+    
     // --- Form Submission Handler ---
     
     // Intercept the 'submit' event of the form with id 'kidneyForm'

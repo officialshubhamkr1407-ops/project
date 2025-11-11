@@ -9,14 +9,30 @@
             <div class="card-body">
                 
                 <form id="liverForm" class="needs-validation" novalidate>
+                    <!-- Sample Data Buttons -->
+                    <div class="card mb-4 border-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Sample Data</h5>
+                            <p class="text-muted small mb-3">Load predefined sample values to test the prediction model</p>
+                            <div class="btn-group" role="group">
+                                <button type="button" class="btn btn-success" id="loadLowRiskLiver">
+                                    <i class="fas fa-check-circle"></i> Load Low Risk Sample
+                                </button>
+                                <button type="button" class="btn btn-danger" id="loadHighRiskLiver">
+                                    <i class="fas fa-exclamation-triangle"></i> Load High Risk Sample
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="container-fluid">
                         <div class="row g-4">
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="age_of_patient" class="form-label">Age of the patient</label>
-                                    <div class="text-center mb-1"><span id="age_of_patientValue">32</span> years</div>
-                                    <input type="range" class="form-range" id="age_of_patient" name="age_of_patient" min="1" max="120" value="32" required>
+                                    <div class="text-center mb-1"><span id="age_of_patientValue">45</span> years</div>
+                                    <input type="range" class="form-range" id="age_of_patient" name="age_of_patient" min="1" max="120" value="45" required>
                                 </div>
                             </div>
 
@@ -26,7 +42,7 @@
                                     <select class="form-select" id="gender_of_patient" name="gender_of_patient" required>
                                         <option value="">Select</option>
                                         <option value="1">Male</option>
-                                        <option value="0" selected>Female</option> 
+                                        <option value="0">Female</option>
                                     </select>
                                 </div>
                             </div>
@@ -34,64 +50,64 @@
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="total_bilirubin" class="form-label">Total Bilirubin (mg/dL)</label>
-                                    <div class="text-center mb-1"><span id="total_bilirubinValue">0.8</span> mg/dL</div>
-                                    <input type="range" step="0.1" class="form-range" id="total_bilirubin" name="total_bilirubin" min="0" max="75" value="0.8" required>
+                                    <div class="text-center mb-1"><span id="total_bilirubinValue">0.7</span> mg/dL</div>
+                                    <input type="range" step="0.1" class="form-range" id="total_bilirubin" name="total_bilirubin" min="0" max="75" value="0.7" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="direct_bilirubin" class="form-label">Direct Bilirubin (mg/dL)</label>
-                                    <div class="text-center mb-1"><span id="direct_bilirubinValue">0.2</span> mg/dL</div>
-                                    <input type="range" step="0.1" class="form-range" id="direct_bilirubin" name="direct_bilirubin" min="0" max="20" value="0.2" required>
+                                    <div class="text-center mb-1"><span id="direct_bilirubinValue">0.1</span> mg/dL</div>
+                                    <input type="range" step="0.1" class="form-range" id="direct_bilirubin" name="direct_bilirubin" min="0" max="20" value="0.1" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="alkphos_alkaline_phosphotase" class="form-label">Alkaline Phosphotase (IU/L)</label>
-                                    <div class="text-center mb-1"><span id="alkphos_alkaline_phosphotaseValue">110</span> IU/L</div>
-                                    <input type="range" class="form-range" id="alkphos_alkaline_phosphotase" name="alkphos_alkaline_phosphotase" min="50" max="2000" value="110" required>
+                                    <div class="text-center mb-1"><span id="alkphos_alkaline_phosphotaseValue">187</span> IU/L</div>
+                                    <input type="range" class="form-range" id="alkphos_alkaline_phosphotase" name="alkphos_alkaline_phosphotase" min="50" max="2000" value="187" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="sgpt_alamine_aminotransferase" class="form-label">Alamine Aminotransferase (IU/L)</label>
-                                    <div class="text-center mb-1"><span id="sgpt_alamine_aminotransferaseValue">25</span> IU/L</div>
-                                    <input type="range" class="form-range" id="sgpt_alamine_aminotransferase" name="sgpt_alamine_aminotransferase" min="5" max="2000" value="25" required>
+                                    <div class="text-center mb-1"><span id="sgpt_alamine_aminotransferaseValue">16</span> IU/L</div>
+                                    <input type="range" class="form-range" id="sgpt_alamine_aminotransferase" name="sgpt_alamine_aminotransferase" min="5" max="2000" value="16" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="sgot_aspartate_aminotransferase" class="form-label">Aspartate Aminotransferase (IU/L)</label>
-                                    <div class="text-center mb-1"><span id="sgot_aspartate_aminotransferaseValue">22</span> IU/L</div>
-                                    <input type="range" class="form-range" id="sgot_aspartate_aminotransferase" name="sgot_aspartate_aminotransferase" min="5" max="2000" value="22" required>
+                                    <div class="text-center mb-1"><span id="sgot_aspartate_aminotransferaseValue">18</span> IU/L</div>
+                                    <input type="range" class="form-range" id="sgot_aspartate_aminotransferase" name="sgot_aspartate_aminotransferase" min="5" max="2000" value="18" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="total_protiens" class="form-label">Total Proteins (g/dL)</label>
-                                    <div class="text-center mb-1"><span id="total_protiensValue">7.0</span> g/dL</div>
-                                    <input type="range" step="0.1" class="form-range" id="total_protiens" name="total_protiens" min="1" max="10" value="7.0" required>
+                                    <div class="text-center mb-1"><span id="total_protiensValue">6.8</span> g/dL</div>
+                                    <input type="range" step="0.1" class="form-range" id="total_protiens" name="total_protiens" min="1" max="10" value="6.8" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="alb_albumin" class="form-label">Albumin (g/dL)</label>
-                                    <div class="text-center mb-1"><span id="alb_albuminValue">4.5</span> g/dL</div>
-                                    <input type="range" step="0.1" class="form-range" id="alb_albumin" name="alb_albumin" min="1" max="6" value="4.5" required>
+                                    <div class="text-center mb-1"><span id="alb_albuminValue">3.3</span> g/dL</div>
+                                    <input type="range" step="0.1" class="form-range" id="alb_albumin" name="alb_albumin" min="1" max="6" value="3.3" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="card h-100 p-3 border-0 bg-light">
                                     <label for="ag_ratio_albumin_and_globulin_ratio" class="form-label">Albumin and Globulin Ratio</label>
-                                    <div class="text-center mb-1"><span id="ag_ratio_albumin_and_globulin_ratioValue">1.40</span></div>
-                                    <input type="range" step="0.01" class="form-range" id="ag_ratio_albumin_and_globulin_ratio" name="ag_ratio_albumin_and_globulin_ratio" min="0.1" max="3" value="1.40" required>
+                                    <div class="text-center mb-1"><span id="ag_ratio_albumin_and_globulin_ratioValue">0.94</span></div>
+                                    <input type="range" step="0.01" class="form-range" id="ag_ratio_albumin_and_globulin_ratio" name="ag_ratio_albumin_and_globulin_ratio" min="0.1" max="3" value="0.94" required>
                                 </div>
                             </div>
                         </div>
@@ -116,47 +132,77 @@
 
 {% block scripts %}
 <script>
+// Wait for the document to be fully loaded before running jQuery
 $(document).ready(function() {
 
     // --- Dynamic Range Slider Value Display ---
     
     // 1. Set initial values on page load
+    // Loop through all range inputs
     $('input[type="range"]').each(function() {
+        // Find the corresponding span (e.g., 'age_of_patient' input finds 'age_of_patientValue' span)
         $('#' + this.id + 'Value').text(this.value);
     });
 
     // 2. Update values live as the slider is moved
+    // Listen for the 'input' event on all range sliders
     $('input[type="range"]').on('input', function() {
+        // Update the text of the corresponding span with the new value
         $('#' + this.id + 'Value').text(this.value);
     });
 
 
+    // --- Sample Data Loaders ---
+    
+    // Low Risk Sample (Normal values)
+    $('#loadLowRiskLiver').on('click', function() {
+        const lowRiskValues = [30, 0, 0.7, 0.1, 187, 16, 18, 6.8, 2.1, 0.94];
+        loadLiverValues(lowRiskValues);
+    });
+    
+    // High Risk Sample (Abnormal values)
+    $('#loadHighRiskLiver').on('click', function() {
+        const highRiskValues = [65, 1, 5.0, 2.0, 500, 200, 250, 5.0, 2.5, 0.6];
+        loadLiverValues(highRiskValues);
+    });
+    
+    // Function to load liver values
+    function loadLiverValues(values) {
+        const fieldOrder = [
+            'age_of_patient', 'gender_of_patient', 'total_bilirubin', 'direct_bilirubin',
+            'alkphos_alkaline_phosphotase', 'sgpt_alamine_aminotransferase', 
+            'sgot_aspartate_aminotransferase', 'total_protiens', 'alb_albumin',
+            'ag_ratio_albumin_and_globulin_ratio'
+        ];
+        
+        fieldOrder.forEach((fieldId, index) => {
+            const value = values[index];
+            const $field = $('#' + fieldId);
+            
+            if ($field.length) {
+                if ($field.is('input[type="range"]')) {
+                    $field.val(value);
+                    $('#' + fieldId + 'Value').text(value);
+                } else if ($field.is('select')) {
+                    $field.val(value.toString());
+                }
+            }
+        });
+    }
+    
     // --- Form Submission Handler ---
     
+    // Intercept the 'submit' event of the form with id 'liverForm'
     $('#liverForm').on('submit', function(e) {
-        e.preventDefault(); // Prevent default page reload
+        
+        // Prevent the default form submission (which would reload the page)
+        e.preventDefault();
 
-        // --- NEW LOADER CODE ---
-        const $form = $(this);
-        const $btn = $form.find('button[type="submit"]'); // Find the submit button
-        const originalBtnText = $btn.text(); // Store original text ("Predict Risk")
-
-        // Disable button and show spinner
-        $btn.prop('disabled', true);
-        $btn.html(
-            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
-        );
-
-        // Hide any old results
-        $('#results').hide();
-        // --- END NEW LOADER CODE ---
-
-
-        // Send an AJAX request
+        // Send an AJAX (Asynchronous JavaScript and XML) request to the server
         $.ajax({
-            url: '/predict_liver',
-            method: 'POST',
-            data: $form.serialize(), // Use the $form variable
+            url: '/predict_liver',  // The server endpoint to send data to
+            method: 'POST',         // Use the POST method
+            data: $(this).serialize(), // Serialize form data into a query string (e.g., age=45&gender=1...)
             
             // Callback function if the request is successful
             success: function(response) {
@@ -165,6 +211,7 @@ $(document).ready(function() {
                     $('#results').show();
                     
                     // Check the prediction and set the alert color
+                    // 1 = Has Disease (danger/red), 0 = No Disease (success/green)
                     const resultClass = response.prediction === 1 ? 'alert-danger' : 'alert-success';
                     
                     // Apply the correct class and remove any old ones
@@ -178,19 +225,10 @@ $(document).ready(function() {
                 }
             },
             
-            // Callback function if the request fails
+            // Callback function if the request fails (e.g., network error, 500 status)
             error: function() {
                 alert('An error occurred while processing your request.');
-            },
-            
-            // --- NEW 'COMPLETE' CALLBACK ---
-            // This runs after EITHER success or error
-            complete: function() {
-                // Re-enable the button and restore its original text
-                $btn.prop('disabled', false);
-                $btn.text(originalBtnText);
             }
-            // --- END NEW 'COMPLETE' CALLBACK ---
         });
     });
 });
